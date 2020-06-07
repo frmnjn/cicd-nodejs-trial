@@ -36,7 +36,10 @@ jobs:
           command: |
             ssh-keyscan -H 13.229.132.103 >> ~/.ssh/known_hosts
             scp -r ~/repo/final.zip ubuntu@13.229.132.103:/var/www/html
-            ls -la
+      - run:
+          name: install pm2
+          command: |
+            ssh ubuntu@13.229.132.103 "sudo npm install pm2 -g"
       - run:
           name: unzip
           command: |
