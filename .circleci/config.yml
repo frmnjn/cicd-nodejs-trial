@@ -40,7 +40,7 @@ jobs:
       - run:
           name: unzip
           command: |
-            ssh ubuntu@13.229.132.103 "cd /var/www/html && mkdir final && unzip final.zip -d final"
+            ssh ubuntu@13.229.132.103 "cd /var/www/html && rm -rf final && mkdir final && unzip final.zip -d final"
       - run:
           name: run node app
           command: |
