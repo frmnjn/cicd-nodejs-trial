@@ -41,7 +41,7 @@ jobs:
           name: unzip
           command: |
             ssh ubuntu@13.229.132.103 "cd /var/www/html && mkdir final && unzip final.zip -d final"
-       - run:
+      - run:
           name: run node app
           command: |
             ssh ubuntu@13.229.132.103 "cd final && sudo pm2 start index.js && sudo pm2 list"
