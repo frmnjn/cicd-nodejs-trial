@@ -27,13 +27,17 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
           
+      - run : sudo apt install zip -y
+
+      - run : zip -r final.zip *
+          
       - run:
           name: upload files
           command: |
             ssh-keyscan -H 13.229.132.103 >> ~/.ssh/known_hosts
-            scp -r ~/repo ubuntu@13.229.132.103:/var/www/html
+            scp -r ~/repo/final.zip ubuntu@13.229.132.103:/var/www/html
             ls -la
       - run:
           name: run node app
           command: |
-            ssh ubuntu@13.229.132.103 "cd var/www/html/repo && sudo pm2 start index.js && sudo pm2 list"
+            ssh ubuntu@13.229.132.103 "cd var/www/html/final && unzip ../final.zip && sudo pm2 start index.js && sudo pm2 list"
