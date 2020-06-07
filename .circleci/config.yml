@@ -38,6 +38,11 @@ jobs:
             scp -r ~/repo/final.zip ubuntu@13.229.132.103:/var/www/html
             ls -la
       - run:
+          name: unzip
+          command: |
+            ssh ubuntu@13.229.132.103 "cd /var/www/html && mkdir final && unzip final.zip -d final"
+       - run:
           name: run node app
           command: |
-            ssh ubuntu@13.229.132.103 "cd /var/www/html && mkdir final && unzip final.zip -d final && sudo pm2 start index.js && sudo pm2 list"
+            ssh ubuntu@13.229.132.103 "cd final && sudo pm2 start index.js && sudo pm2 list"
+
